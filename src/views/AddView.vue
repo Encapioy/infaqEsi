@@ -117,7 +117,7 @@ const store = () => {
     axios.post(url, form)
         .then(response => console.log(response))
         .catch(error => {
-            console.error('Terjadi kesalahan:', error);
+            // console.error('Terjadi kesalahan:', error);  
         });
 };
 
