@@ -95,14 +95,12 @@
 
 <script setup>
 import FooterComp from "../components/FooterComp.vue";
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 import axios from "axios";
-
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 const url = 'http://donasi-api.test/api/infaq'
 
-const form = ref({
+const form = reactive({
     judul: '',
     deskripsi: '',
     bank: '',
@@ -115,12 +113,9 @@ const alert = ref([])
 
 
 const store = () => {
-    axios.post(url, form, {
-        headers: {
-           Accept: 'application/json' 
-        }
-    })
-        .then(response => console.log(response.data))
+
+    axios.post(url, form)
+        .then(response => console.log(response))
         .catch(error => {
             console.error('Terjadi kesalahan:', error);
         });
