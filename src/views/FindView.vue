@@ -52,6 +52,8 @@ import axios from "axios";
 const route = useRoute();
 const id = route.params.id;
 
+console.log(id);
+
 const infaq = ref([])
 const url = 'http://donasi-api.test/api/infaq'
 

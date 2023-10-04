@@ -3,9 +3,9 @@
         <div class="grid grid-cols-1 gap-4">
             <div class="w-full h-full rounded shadow-md overflow-hidden">
                 <div class="pt-5">
-                    <h2 class="text-3xl lg:text-4xl uppercase font-semibold text-center">Tambah Data</h2>
+                    <h2 class="text-3xl lg:text-4xl uppercase font-semibold text-center">Ubah Data</h2>
                 </div>
-                <form class="p-5 px-10" @submit.prevent="store">
+                <form class="p-5 px-10" @submit.prevent="update">
 
                     <!-- Judul -->
                     <div class="my-8">
@@ -85,13 +85,6 @@
                 </form>
             </div>
         </div>
-        <RouterLink to="/">
-            <button 
-                class="rounded text-white bg-red-500 px-4 py-2 shadow shadow-gray-400 w-40 mt-10 hover:shadow-lg">
-                <span class="mdi mdi-arrow-left me-1"></span>
-                <span class="uppercase">kembali</span>
-            </button>
-        </RouterLink>
     </div>
 
     <FooterComp />
@@ -99,12 +92,19 @@
 
 <script setup>
 import FooterComp from "../components/FooterComp.vue";
-import { reactive, ref } from "vue";
+import { reactive, ref, onBeforeMount } from "vue";
+import { useRoute } from "vue-router";
 import axios from "axios";
+
+
+const route = useRoute();
+const id = route.params.id;
 
 const url = 'http://donasi-api.test/api/infaq'
 
 const form = reactive({
+    _method: 'patch',
+    id: '',
     judul: '',
     deskripsi: '',
     bank: '',
@@ -113,22 +113,36 @@ const form = reactive({
 })
 
 const alert = ref([])
+const infaq = ref([])
 
 
 
-const store = () => {
+const update = () => {
 
     axios.post(url, form)
-        .then(response => alert('berhasil menambah kategori'))
+        .then(response => console.log("berhasil"))
         .catch(error => {
             console.error('Terjadi kesalahan:', error);
         });
-
-    setTimeout(() => {
-        location.reload()
-    }, 500);
-
 };
+
+onBeforeMount(() => {
+
+    axios.get(url + '/' + id)
+        .then(response => (infaq.value = form.value))
+
+    // const res = route.params.id
+
+    // form.id = res.id
+    // form.judul = res.judul
+    // form.deskripsi = res.deskripsi
+    // form.bank = res.bank
+    // form.rekening = res.rekening
+    // form.target = res.target
+    // form.gambar = res.gambar
+
+    // console.log(alert);
+})
 
 
 </script>

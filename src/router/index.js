@@ -26,21 +26,29 @@ const router = createRouter({
       component: () => import('../views/LoginView.vue')
     },
     {
-      path: '/infaq-add',
-      name: 'infaq-add',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/addView.vue')
-    },
-    {
       path: '/infaq-find/:id',
       name: 'infaq-find',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/FindView.vue')
-    }
+    },
+    {
+      path: '/infaq-add',
+      name: 'infaq-add',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/AddView.vue')
+    },
+    {
+      path: '/infaq-edit/:id',
+      name: 'infaq-edit',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/EditView.vue')
+    },
   ]
 })
 
