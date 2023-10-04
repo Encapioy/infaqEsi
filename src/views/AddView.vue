@@ -18,11 +18,6 @@
                                     class="absolute left-0 text-sm -top-5 text-gray-400 capitalize peer-placeholder-shown:-top-0 peer-placeholder-shown:text-base cursor-text peer-focus:text-sm peer-focus:-top-5 duration-200">Judul</label>
                             </div>
                         </div>
-                        <div class="mt-2">
-                            <p class="peer-invalid:invisible text-pink-600 text-sm">
-                                Kolom harus diisi
-                            </p>
-                        </div>
                     </div>
 
                     <!-- deskripsi -->
@@ -126,7 +121,7 @@ const store = () => {
 
     setTimeout(() => {
         location.reload()
-    }, 500);
+    }, 1000);
 
 };
 

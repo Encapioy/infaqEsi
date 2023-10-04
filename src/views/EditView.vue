@@ -18,11 +18,6 @@
                                     class="absolute left-0 text-sm -top-5 text-gray-400 capitalize peer-placeholder-shown:-top-0 peer-placeholder-shown:text-base cursor-text peer-focus:text-sm peer-focus:-top-5 duration-200">Judul</label>
                             </div>
                         </div>
-                        <div class="mt-2">
-                            <p class="peer-invalid:invisible text-pink-600 text-sm">
-                                Kolom harus diisi
-                            </p>
-                        </div>
                     </div>
 
                     <!-- deskripsi -->
@@ -85,6 +80,12 @@
                 </form>
             </div>
         </div>
+        <RouterLink to="/">
+            <button class="rounded text-white bg-red-500 px-4 py-2 shadow shadow-gray-400 w-40 mt-10 hover:shadow-lg">
+                <span class="mdi mdi-arrow-left me-1"></span>
+                <span class="uppercase">kembali</span>
+            </button>
+        </RouterLink>
     </div>
 
     <FooterComp />
@@ -120,28 +121,26 @@ const infaq = ref([])
 const update = () => {
 
     axios.post(url, form)
-        .then(response => console.log("berhasil"))
+        .then(response => alert('berhasil mengubah data'))
         .catch(error => {
-            console.error('Terjadi kesalahan:', error);
+            alert('Terjadi kesalahan:', error);
         });
+
+    setTimeout(() => {
+        location.reload()
+    }, 1000);
 };
 
 onBeforeMount(() => {
 
     axios.get(url + '/' + id)
-        .then(response => (infaq.value = form.value))
-
-    // const res = route.params.id
-
-    // form.id = res.id
-    // form.judul = res.judul
-    // form.deskripsi = res.deskripsi
-    // form.bank = res.bank
-    // form.rekening = res.rekening
-    // form.target = res.target
-    // form.gambar = res.gambar
-
-    // console.log(alert);
+        .then(response => {
+            form.id = response.data.id
+            form.deskripsi = response.data.deskripsi
+            form.bank = response.data.bank
+            form.rekening = response.data.rekening
+            form.target = response.data.target
+        })
 })
 
 
