@@ -64,14 +64,6 @@
                         </div>
                     </div>
 
-                    <!-- gambar -->
-                    <!-- <div class="flex items-center my-8">
-                        <div class="w-full relative">
-                            <label class="text-gray-400 capitalize text-base cursor-text">gambar</label>
-                            <input type="file" class="text-gray-900 outline-none block mt-4">
-                        </div>
-                    </div> -->
-
                     <!-- submit -->
                     <button type="submit"
                         class="rounded text-white bg-blue-800 px-4 py-2 shadow shadow-gray-400 w-full mt-10 hover:shadow-lg">
