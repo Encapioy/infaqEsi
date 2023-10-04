@@ -116,7 +116,7 @@ const store = () => {
     axios.post(url, form)
         .then(response => alert('berhasil menambah kategori'))
         .catch(error => {
-            console.error('Terjadi kesalahan:', error);
+            alert('Terjadi kesalahan:', error);
         });
 
     setTimeout(() => {

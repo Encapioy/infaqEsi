@@ -53,6 +53,13 @@
                 </div>
             </div>
         </div>
+         <RouterLink to="/infaq-add">
+            <button 
+                class="rounded text-white bg-green-500 px-4 py-2 shadow shadow-gray-400 w-full mt-10 hover:shadow-lg">
+                <span class="uppercase me-1">Tambah Kategori</span>
+                <span class="mdi mdi-plus"></span> 
+            </button>
+        </RouterLink>
     </div>
 
     <FooterComp />

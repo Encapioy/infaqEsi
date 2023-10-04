@@ -128,6 +128,7 @@ const update = () => {
 
     setTimeout(() => {
         location.reload()
+        form.value.reload()
     }, 1000);
 };
 
@@ -136,6 +137,7 @@ onBeforeMount(() => {
     axios.get(url + '/' + id)
         .then(response => {
             form.id = response.data.id
+            form.judul = response.data.judul
             form.deskripsi = response.data.deskripsi
             form.bank = response.data.bank
             form.rekening = response.data.rekening

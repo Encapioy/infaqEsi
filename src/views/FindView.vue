@@ -16,6 +16,7 @@
                         <p class="text-sm mb-4">No Rekening: <span class="font-bold">{{ infaq.rekening }}</span></p>
                         <div class="flex justify-between">
                             <button
+                                @click="salin(infaq.rekening)"
                                 class="rounded flex items-center text-blue-400 outline outline-1 outline-blue-400 px-3 py-px">
                                 <span class="mdi mdi-content-copy me-1"></span>
                                 <span class="uppercase">salin</span>
@@ -38,6 +39,12 @@
                 </div>
             </div>
         </div>
+        <RouterLink to="/">
+            <button class="rounded text-white bg-red-500 px-4 py-2 shadow shadow-gray-400 w-40 mt-10 hover:shadow-lg">
+                <span class="mdi mdi-arrow-left me-1"></span>
+                <span class="uppercase">kembali</span>
+            </button>
+        </RouterLink>
     </div>
 
     <FooterComp />
@@ -48,6 +55,11 @@ import FooterComp from "../components/FooterComp.vue";
 import { ref } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
+
+function salin(text) {
+    navigator.clipboard.writeText(text)
+    alert('Alhamdulillah. No Rek sudah tersalin, silahkan di Paste ke aplikasi perbankan anda.')
+}
 
 const route = useRoute();
 const id = route.params.id;
