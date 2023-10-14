@@ -38,6 +38,7 @@ const form = reactive({
     id: route.params.id,
     judul: '',
     deskripsi: '',
+    gambar: '',
     nominal: '',
     nama: '',
 })
@@ -51,6 +52,7 @@ onBeforeMount(async () => {
 
     form.judul = res.judul
     form.deskripsi = res.deskripsi
+    form.gambar = res.gambar
 })
 </script>
 
@@ -59,7 +61,7 @@ onBeforeMount(async () => {
         <div class="grid grid-cols-1 gap-4">
             <div class="w-full h-full rounded shadow-md overflow-hidden">
                 <div class="h-48">
-                    <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp" class="object-cover w-full h-full"
+                    <img :src="storage + '/images/' + form.gambar" class="object-cover w-full h-full"
                         alt="Fissure in Sandstone" />
                     <h5 class="text-xl text-white -mt-10 mb-5 ms-5">{{ form.judul }}</h5>
                 </div>

@@ -44,6 +44,12 @@ const socialMedia = ref([
         color: 'text-green-600',
         text: 'Whatsapp'
     },
+    {
+        link: '',
+        icon: 'mdi mdi-tiktok',
+        color: 'text-black',
+        text: 'jangan lupa follow @zakirullah._'
+    },
     
 ])
 
