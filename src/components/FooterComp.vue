@@ -1,3 +1,54 @@
+<script setup>
+import { ref } from "vue";
+
+const socialMedia = ref([
+    {
+        link: 'https://www.google.com/maps/place/Pondok+Pesantren+Fahim+Quran+Plus/@-6.656222,106.696666,10z/data=!4m6!3m5!1s0x2e69d0413a51008d:0x4216c9d21d02a98e!8m2!3d-6.656222!4d106.696666!16s%2Fg%2F11ggwb8sdk?hl=id&entry=ttu',
+        icon: 'mdi mdi-map-marker-outline',
+        color: 'text-red-700',
+        text: 'Lokasi'
+    },
+    {
+        link: 'https://www.sekolahimpian.com/',
+        icon: 'mdi mdi-web',
+        color: 'text-blue-600',
+        text: 'Website'
+    },
+    {
+        link: 'https://www.youtube.com/@SekolahImpianTV',
+        icon: 'mdi mdi-youtube',
+        color: 'text-red-600',
+        text: 'SekolahImpianTV'
+    },
+    {
+        link: 'https://www.youtube.com/@SekolahImpianku/videos',
+        icon: 'mdi mdi-youtube',
+        color: 'text-red-600',
+        text: 'SekolahImpianku'
+    },
+    {
+        link: 'https://www.instagram.com/quadrantboardingschool/',
+        icon: 'mdi mdi-instagram',
+        color: 'text-red-800',
+        text: 'quadrantboardingschool'
+    },
+    {
+        link: 'https://www.instagram.com/fahimquranplus/',
+        icon: 'mdi mdi-instagram',
+        color: 'text-red-800',
+        text: 'fahimquranplus'
+    },
+    {
+        link: 'https://api.whatsapp.com/send?phone=6281282251136&text=Assalammualaikum',
+        icon: 'mdi mdi-whatsapp',
+        color: 'text-green-600',
+        text: 'Whatsapp'
+    },
+    
+])
+
+</script>
+
 <template>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" style="position: relative; bottom: -10px; z-index: -1;">
         <path fill="#FB8C00" fill-opacity="1"
@@ -9,46 +60,11 @@
     <footer class="p-4">
         <div>
             <ul>
-                <li class="mb-1">
-                    <a href="https://www.google.com/maps/place/Pondok+Pesantren+Fahim+Quran+Plus/@-6.656222,106.696666,10z/data=!4m6!3m5!1s0x2e69d0413a51008d:0x4216c9d21d02a98e!8m2!3d-6.656222!4d106.696666!16s%2Fg%2F11ggwb8sdk?hl=id&entry=ttu" target="blank" class="flex items-center">
-                        <span class="me-2 text-lg mdi mdi-map-marker-outline text-red-700"></span>
-                        <span>Lokasi</span>
-                    </a>
-                </li>
-                <li class="mb-1">
-                    <a href="https://www.sekolahimpian.com/" target="blank" class="flex items-center">
-                        <span class="me-2 text-lg mdi mdi-web text-blue-600"></span>
-                        <span>Website</span>
-                    </a>
-                </li>
-                <li class="mb-1">
-                    <a href="https://www.youtube.com/@SekolahImpianTV" target="blank" class="flex items-center">
-                        <span class="me-2 text-lg mdi mdi-youtube text-red-600"></span>
-                        <span>SekolahImpianTV</span>
-                    </a>
-                </li>
-                <li class="mb-1">
-                    <a href="https://www.youtube.com/@SekolahImpianku/videos" target="blank" class="flex items-center">
-                        <span class="me-2 text-lg mdi mdi-youtube text-red-600"></span>
-                        <span>SekolahImpianku</span>
-                    </a>
-                </li>
-                <li class="mb-1">
-                    <a href="https://www.instagram.com/quadrantboardingschool/" target="blank" class="flex items-center">
-                        <span class="me-2 text-lg mdi mdi-instagram text-red-800"></span>
-                        <span>quadrantboardingschool</span>
-                    </a>
-                </li>
-                <li class="mb-1">
-                    <a href="https://www.instagram.com/fahimquranplus/" target="blank" class="flex items-center">
-                        <span class="me-2 text-lg mdi mdi-instagram text-red-800"></span>
-                        <span>fahimquranplus</span>
-                    </a>
-                </li>
-                <li class="mb-1">
-                    <a href="https://api.whatsapp.com/send?phone=6281282251136&text=Assalammualaikum" target="blank" class="flex items-center">
-                        <span class="me-2 text-lg mdi mdi-whatsapp text-green-600"></span>
-                        <span>Whatsapp</span>
+                <li class="mb-1" v-for="item in socialMedia" :key="item.icon">
+                    <a :href="item.link" target="blank"
+                        class="flex items-center">
+                        <span class="me-2 text-lg" :class="item.icon , item.color"></span>
+                        <span v-text="item.text"></span>
                     </a>
                 </li>
             </ul>

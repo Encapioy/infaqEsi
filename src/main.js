@@ -8,4 +8,7 @@ const app = createApp(App)
 
 app.use(router)
 
+// Storage URL
+app.config.globalProperties.storage = import.meta.env.VITE_BASE_URL + '/storage'
+
 app.mount('#app')

@@ -7,10 +7,13 @@
           <h1 class="text-xl text-black">Yuk Infaq</h1>
         </a>
       </div>
-      <div class="flex lg:flex-1 lg:justify-end">
-        <a href="#" class="text-sm font-semibold leading-6 text-gray-900">
+      <div class="relative flex lg:flex-1 lg:justify-end">
+        <button v-if="getToken" @click="deleteCookie('token')" class="text-sm font-semibold leading-6 text-gray-900">
           <span class="mdi mdi-logout text-2xl"></span>
-        </a>
+        </button>
+        <RouterLink v-else to="/infaq-login" class="absolute right-1 -top-4 text-sm font-semibold leading-6 text-gray-900">
+          <span class="mdi mdi-login text-2xl"></span>
+        </RouterLink>
       </div>
     </nav>
   </header>
@@ -19,4 +22,24 @@
 </template>
 
 <script setup>
+import { useToken } from "../src/stores/auth.js";
+import { provide } from "vue";
+
+const getToken = useToken()
+
+function deleteCookie(name) {
+  // Mengatur tanggal kedaluwarsa ke masa lalu
+  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+
+  location.reload()
+}
+
+const salin = (text) => {
+  navigator.clipboard.writeText(text)
+  alert('nomor rekening sudah tersalin')
+} 
+
+provide('salin', salin);
+
+
 </script>

@@ -1,3 +1,45 @@
+<script setup>
+import FooterComp from "../components/FooterComp.vue";
+import BackButton from "../components/BackButton.vue";
+import infaq from "../api/infaq.js"
+import { reactive, ref } from "vue";
+
+const url = 'http://donasi-api.test/api/infaq'
+
+const preview = ref()
+const form = reactive({
+    judul: '',
+    deskripsi: '',
+    bank: '',
+    rekening: '',
+    target: '',
+    gambar: ''
+})
+
+function fileImg(upload) {
+    const file = upload.target.files[0]
+
+    form.gambar = file
+    preview.value = URL.createObjectURL(file)
+}
+
+const store = async () => {
+
+    const formData = new FormData()
+    for (const item in form) {
+        formData.append(item, form[item])
+    }
+
+    await infaq.store(formData)
+        .finally(() => {
+            setTimeout(() => {
+                location.reload()
+            }, 1000);
+        })
+};
+
+</script>
+
 <template>
     <div class="container px-3 lg:px-11 py-4">
         <div class="grid grid-cols-1 gap-4">
@@ -64,6 +106,14 @@
                         </div>
                     </div>
 
+                    <!-- gambar -->
+                    <div class="flex items-center my-8">
+                        <div class="w-full relative">
+                            <label class="text-gray-400 capitalize text-base cursor-text">Gambar</label>
+                            <input type="file" @change="fileImg" class="w-full outline-none mt-3">
+                        </div>
+                    </div>
+
                     <!-- submit -->
                     <button type="submit"
                         class="rounded text-white bg-blue-800 px-4 py-2 shadow shadow-gray-400 w-full mt-10 hover:shadow-lg">
@@ -72,50 +122,8 @@
                 </form>
             </div>
         </div>
-        <RouterLink to="/">
-            <button 
-                class="rounded text-white bg-red-500 px-4 py-2 shadow shadow-gray-400 w-40 mt-10 hover:shadow-lg">
-                <span class="mdi mdi-arrow-left me-1"></span>
-                <span class="uppercase">kembali</span>
-            </button>
-        </RouterLink>
+        <BackButton />
     </div>
 
     <FooterComp />
 </template>
-
-<script setup>
-import FooterComp from "../components/FooterComp.vue";
-import { reactive, ref } from "vue";
-import axios from "axios";
-
-const url = 'http://donasi-api.test/api/infaq'
-
-const form = reactive({
-    judul: '',
-    deskripsi: '',
-    bank: '',
-    rekening: '',
-    target: ''
-})
-
-const alert = ref([])
-
-
-
-const store = () => {
-
-    axios.post(url, form)
-        .then(response => alert('berhasil menambah kategori'))
-        .catch(error => {
-            alert('Terjadi kesalahan:', error);
-        });
-
-    setTimeout(() => {
-        location.reload()
-    }, 1000);
-
-};
-
-
-</script>

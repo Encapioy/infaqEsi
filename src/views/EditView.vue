@@ -1,3 +1,52 @@
+<script setup>
+import FooterComp from "../components/FooterComp.vue";
+import BackButton from "../components/BackButton.vue";
+import infaq from "../api/infaq.js"
+import { reactive, ref, onBeforeMount } from "vue";
+import { useRoute } from "vue-router";
+
+
+const route = useRoute();
+const id = route.params.id;
+
+const url = 'http://donasi-api.test/api/infaq'
+
+const form = reactive({
+    _method: 'patch',
+    id: '',
+    judul: '',
+    deskripsi: '',
+    bank: '',
+    rekening: '',
+    target: ''
+})
+
+const update = async () => {
+
+    await infaq.store(form)
+        .finally(() => {
+            setTimeout(() => {
+                location.reload()
+            }, 1000);
+        })
+
+};
+
+onBeforeMount(async () => {
+    const res = await infaq.find(route.params.id)
+
+    form.id = res.id
+    form.judul = res.judul
+    form.deskripsi = res.deskripsi
+    form.bank = res.bank
+    form.rekening = res.rekening
+    form.target = res.target
+
+})
+
+
+</script>
+
 <template>
     <div class="container px-3 lg:px-11 py-4">
         <div class="grid grid-cols-1 gap-4">
@@ -72,70 +121,8 @@
                 </form>
             </div>
         </div>
-        <RouterLink to="/">
-            <button class="rounded text-white bg-red-500 px-4 py-2 shadow shadow-gray-400 w-40 mt-10 hover:shadow-lg">
-                <span class="mdi mdi-arrow-left me-1"></span>
-                <span class="uppercase">kembali</span>
-            </button>
-        </RouterLink>
+        <BackButton />
     </div>
 
     <FooterComp />
 </template>
-
-<script setup>
-import FooterComp from "../components/FooterComp.vue";
-import { reactive, ref, onBeforeMount } from "vue";
-import { useRoute } from "vue-router";
-import axios from "axios";
-
-
-const route = useRoute();
-const id = route.params.id;
-
-const url = 'http://donasi-api.test/api/infaq'
-
-const form = reactive({
-    _method: 'patch',
-    id: '',
-    judul: '',
-    deskripsi: '',
-    bank: '',
-    rekening: '',
-    target: ''
-})
-
-const alert = ref([])
-const infaq = ref([])
-
-
-
-const update = () => {
-
-    axios.post(url, form)
-        .then(response => alert('berhasil mengubah data'))
-        .catch(error => {
-            alert('Terjadi kesalahan:', error);
-        });
-
-    setTimeout(() => {
-        location.reload()
-        form.value.reload()
-    }, 1000);
-};
-
-onBeforeMount(() => {
-
-    axios.get(url + '/' + id)
-        .then(response => {
-            form.id = response.data.id
-            form.judul = response.data.judul
-            form.deskripsi = response.data.deskripsi
-            form.bank = response.data.bank
-            form.rekening = response.data.rekening
-            form.target = response.data.target
-        })
-})
-
-
-</script>
